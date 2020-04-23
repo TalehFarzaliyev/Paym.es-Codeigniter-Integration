@@ -11,7 +11,7 @@ Autoload üçün
 
 Controllerdə bu şəkildə çağırıb sorğunuzu göndərə bilərsiniz
 
-	  $this->millikart->set($amount, $uniq_id, $description);
+	  $this->paymes->set($amount, $uniq_id, $description);
 	  $response = $this->paymes->getURL();
 	  redirect($response, 'refresh');
 
