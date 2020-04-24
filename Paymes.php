@@ -32,23 +32,24 @@ class Paymes {
 	public function getURL()
     {  
         $data = [
-        	'secretkey'		=> $this->secretkey,
+        	'secret'		=> $this->secretkey,
         	'productPrice'	=> $this->productPrice,
         	'productName'	=> $this->productName,
         	'firstName'		=> $this->firstName,
         	'lastName'		=> $this->lastName,
         	'email'			=> $this->email
         ];
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($data),
+            )
+        );
 
-        $cURLConnection = curl_init($this->pro_url);
-        curl_setopt($cURLConnection, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+        $context    = stream_context_create($options);
+        $result     = file_get_contents($this->pro_url, false, $context);
+        return json_decode($result);
 
-        $apiResponse = curl_exec($cURLConnection);
-        curl_close($cURLConnection);
-
-        $response = json_decode($apiResponse);
-        
-        return $response->url;
     }
 }
