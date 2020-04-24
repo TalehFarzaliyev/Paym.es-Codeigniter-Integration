@@ -13,7 +13,7 @@ Controllerdə bu şəkildə çağırıb sorğunuzu göndərə bilərsiniz
 
 	  $this->paymes->set($productPrice, $productName, $firstName, $lastName, $email);
 	  $response = $this->paymes->getURL();
-	  redirect($response, 'refresh');
+	  redirect($response->url, 'refresh');
 
 Callback üçün isə
 
